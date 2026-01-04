@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { ChevronRight, Newspaper, ExternalLink } from "lucide-react"
 import { MetasOrbit } from "@/components/metas-orbit"
+import EcosystemCircle from "@/components/ecosystem-circle"
 
 const services = [
   {
@@ -86,6 +87,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Ecosystem Circle */}
+      <EcosystemCircle />
 
       {/* Web3 Metas Orbit Section */}
       <section className="py-12 md:py-16 px-4">
