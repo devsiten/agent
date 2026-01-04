@@ -25,34 +25,34 @@ export function Navbar() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
-            <div className="container flex h-16 items-center justify-between">
+            <div className="container flex h-16 items-center justify-between px-4">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 font-black text-xl sm:text-2xl tracking-tight">
+                <Link href="/" className="flex items-center gap-2 font-black text-lg sm:text-xl tracking-tight flex-shrink-0">
                     <Image
                         src="/images/logo.jpg"
                         alt="Switch Labs"
-                        width={36}
-                        height={36}
+                        width={32}
+                        height={32}
                         className="rounded-full"
                     />
                     <span className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">SWITCH</span>
                     <span className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">LABS</span>
                 </Link>
 
-                {/* Desktop Nav */}
-                <nav className="hidden lg:flex items-center gap-6 text-base font-medium">
+                {/* Desktop Nav - Only show on xl screens and up */}
+                <nav className="hidden xl:flex items-center gap-4 text-sm font-medium">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="transition-colors hover:text-primary"
+                            className="transition-colors hover:text-primary whitespace-nowrap"
                         >
                             {link.label}
                         </Link>
                     ))}
                 </nav>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                     {/* Theme Toggle */}
                     <Button
                         variant="ghost"
@@ -65,13 +65,13 @@ export function Navbar() {
                     </Button>
 
                     {/* CTA Button - Desktop */}
-                    <Link href="/apply" className="hidden md:block">
-                        <Button size="lg" className="text-base bg-white text-black hover:bg-gray-100 border-0">Get in Touch</Button>
+                    <Link href="/apply" className="hidden lg:block">
+                        <Button size="sm" className="text-sm bg-white text-black hover:bg-gray-100 border-0">Get in Touch</Button>
                     </Link>
 
-                    {/* Mobile Menu */}
+                    {/* Mobile Menu - Show on screens below xl */}
                     <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                        <SheetTrigger asChild className="lg:hidden">
+                        <SheetTrigger asChild className="xl:hidden">
                             <Button variant="ghost" size="icon">
                                 <Menu className="h-5 w-5" />
                             </Button>
@@ -101,6 +101,13 @@ export function Navbar() {
                                         </Link>
                                     ))}
                                 </nav>
+
+                                {/* CTA in mobile menu */}
+                                <div className="mt-auto pt-6">
+                                    <Link href="/apply" onClick={() => setMobileMenuOpen(false)}>
+                                        <Button className="w-full">Get in Touch</Button>
+                                    </Link>
+                                </div>
                             </div>
                         </SheetContent>
                     </Sheet>
