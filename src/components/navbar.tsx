@@ -14,7 +14,7 @@ const navLinks = [
     { href: "/kols", label: "KOLs" },
     { href: "/about", label: "About" },
     { href: "/team", label: "Team" },
-    { href: "/book", label: "Book Consultation" },
+    { href: "/book", label: "Schedule a Call" },
 ]
 
 export function Navbar() {

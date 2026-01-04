@@ -97,7 +97,7 @@ export default function BookPage() {
                     <div className="font-bold text-2xl">
                         <span className="text-primary">Switch</span>Labs.
                     </div>
-                    <CardTitle className="text-3xl">Discovery Call</CardTitle>
+                    <CardTitle className="text-3xl">Schedule a Call</CardTitle>
                     <CardDescription className="text-lg max-w-xl mx-auto">
                         We are excited to hear about your project, understand your marketing needs, and discuss how we can help you grow.
                     </CardDescription>

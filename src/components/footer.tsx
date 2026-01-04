@@ -19,7 +19,7 @@ export function Footer() {
                             <h4 className="font-semibold text-lg">Quick Links</h4>
                             <nav className="flex flex-col gap-3 text-muted-foreground">
                                 <Link href="/apply" className="hover:text-primary transition-colors text-base">Submit Project</Link>
-                                <Link href="/book" className="hover:text-primary transition-colors text-base">Book Consultation</Link>
+                                <Link href="/book" className="hover:text-primary transition-colors text-base">Schedule a Call</Link>
                                 <Link href="/services" className="hover:text-primary transition-colors text-base">Services</Link>
                                 <Link href="/about" className="hover:text-primary transition-colors text-base">About Us</Link>
                                 <Link href="/faq" className="hover:text-primary transition-colors text-base">FAQ</Link>
