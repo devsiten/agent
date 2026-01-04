@@ -35,7 +35,8 @@ interface NewsItem {
   url: string
   source: string
   date: string
-  currencies: string[]
+  image?: string
+  description?: string
 }
 
 export default function Home() {
@@ -134,7 +135,7 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             <h2>Meta News</h2>
-            <Link href="#" className="text-primary hover:underline flex items-center gap-1 text-sm">
+            <Link href="/news" className="text-primary hover:underline flex items-center gap-1 text-sm">
               View All <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -142,9 +143,12 @@ export default function Home() {
           {loading ? (
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="rounded-xl border border-border/50 bg-card/30 p-4 animate-pulse">
-                  <div className="h-4 bg-secondary rounded w-3/4 mb-3"></div>
-                  <div className="h-3 bg-secondary rounded w-1/2"></div>
+                <div key={i} className="rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 overflow-hidden animate-pulse">
+                  <div className="h-32 bg-border/20 dark:bg-border/10"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-border/20 dark:bg-border/10 rounded w-3/4 mb-3"></div>
+                    <div className="h-3 bg-border/20 dark:bg-border/10 rounded w-1/2"></div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -156,34 +160,41 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {news.slice(0, 9).map((item, i) => (
+              {news.slice(0, 6).map((item, i) => (
                 <a
                   key={i}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm p-4 hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300"
+                  className="group rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm overflow-hidden hover:border-primary/40 transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <h3 className="text-sm font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                  {/* Image */}
+                  <div className="relative w-full h-32 bg-border/10 overflow-hidden">
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-border/10">
+                        <Newspaper className="h-8 w-8 text-muted-foreground/50" />
+                      </div>
+                    )}
+                  </div>
+                  {/* Content */}
+                  <div className="p-4">
+                    <h3 className="text-sm font-medium line-clamp-2 mb-2 group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
-                    <ExternalLink className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <span>{item.source}</span>
-                    <span>•</span>
-                    <span>{item.date}</span>
-                  </div>
-                  {item.currencies.length > 0 && (
-                    <div className="flex gap-1 mt-2 flex-wrap">
-                      {item.currencies.slice(0, 3).map((currency) => (
-                        <span key={currency} className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary">
-                          {currency}
-                        </span>
-                      ))}
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <span className="font-medium">{item.source}</span>
+                      <span>•</span>
+                      <span>{item.date}</span>
                     </div>
-                  )}
+                  </div>
                 </a>
               ))}
             </div>
