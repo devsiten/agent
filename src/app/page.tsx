@@ -130,24 +130,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Meta News Section */}
+      {/* News Section */}
       <section className="py-12 md:py-16 px-4">
         <div className="container">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-            <h2>Meta News</h2>
+            <h2>News</h2>
             <Link href="/news" className="text-primary hover:underline flex items-center gap-1 text-sm">
               View All <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
 
           {loading ? (
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 overflow-hidden animate-pulse">
-                  <div className="h-32 bg-border/20 dark:bg-border/10"></div>
-                  <div className="p-4">
-                    <div className="h-4 bg-border/20 dark:bg-border/10 rounded w-3/4 mb-3"></div>
-                    <div className="h-3 bg-border/20 dark:bg-border/10 rounded w-1/2"></div>
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                <div key={i} className="rounded-xl border border-border/30 bg-background overflow-hidden">
+                  <div className="h-24 bg-muted/30"></div>
+                  <div className="p-3">
+                    <div className="h-3 bg-muted/30 rounded w-3/4 mb-2"></div>
+                    <div className="h-2 bg-muted/30 rounded w-1/2"></div>
                   </div>
                 </div>
               ))}
@@ -159,17 +159,17 @@ export default function Home() {
               <p className="text-muted-foreground max-w-md text-sm">Unable to fetch news at this time.</p>
             </div>
           ) : (
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {news.slice(0, 6).map((item, i) => (
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+              {news.slice(0, 10).map((item, i) => (
                 <a
                   key={i}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm overflow-hidden hover:border-primary/40 transition-all duration-300"
+                  className="group rounded-xl border border-border/30 bg-background overflow-hidden hover:border-primary/40 transition-all duration-300"
                 >
                   {/* Image */}
-                  <div className="relative w-full h-32 bg-border/10 overflow-hidden">
+                  <div className="relative w-full h-24 bg-muted/20 overflow-hidden">
                     {item.image ? (
                       <Image
                         src={item.image}
