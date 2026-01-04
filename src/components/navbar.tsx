@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const navLinks = [
+    { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/narratives", label: "Narratives" },
     { href: "/projects", label: "Projects" },
