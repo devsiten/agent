@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { TrendingUp, Users, Brush, Cpu, ChevronRight, Newspaper } from "lucide-react";
+import { MetasOrbit } from "@/components/metas-orbit";
 
 export default function Home() {
   const pillars = [
@@ -50,6 +51,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Web3 Metas Orbit Section */}
+      <section className="py-20 md:py-28 px-4">
+        <div className="container">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">The Narratives We Track</h2>
+          <MetasOrbit />
+        </div>
+      </section>
+
       {/* What We Do Section */}
       <section className="py-20 md:py-28 bg-secondary/30 backdrop-blur-sm px-4">
         <div className="container">
@@ -79,7 +88,7 @@ export default function Home() {
           </div>
 
           {news.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center border border-dashed rounded-xl px-4">
+            <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center border border-dashed rounded-xl px-4 border-border/50 bg-card/30 backdrop-blur-sm">
               <Newspaper className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mb-4" />
               <h3 className="text-lg sm:text-xl font-semibold mb-2">No Updates Yet</h3>
               <p className="text-muted-foreground max-w-md text-sm sm:text-base">News and announcements will appear here. Stay tuned for updates.</p>
