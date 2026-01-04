@@ -19,7 +19,7 @@ interface Project {
     change7d: number
 }
 
-const CATEGORIES = ["All", "DeFi", "Infrastructure", "L2s", "RWA", "Gaming", "NFTs", "SocialFi"]
+const CATEGORIES = ["All", "DeFi", "Trading", "Prediction", "Infrastructure", "L2s", "RWA", "Gaming", "NFTs", "SocialFi"]
 
 export default function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([])
@@ -54,9 +54,9 @@ export default function ProjectsPage() {
         <div className="container py-10 sm:py-16 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="text-center space-y-4 mb-10">
-                <h1>Project Directory</h1>
+                <h1>Projects</h1>
                 <p className="text-muted-foreground max-w-xl mx-auto">
-                    100+ curated Web3 projects from DeFi Llama, categorized by narrative.
+                    Discover trending Web3 projects.
                 </p>
             </div>
 
@@ -67,8 +67,8 @@ export default function ProjectsPage() {
                         key={cat}
                         onClick={() => setActiveCategory(cat)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                                ? "bg-primary text-white"
-                                : "bg-muted/50 hover:bg-muted text-foreground"
+                            ? "bg-primary text-white"
+                            : "bg-muted/50 hover:bg-muted text-foreground"
                             }`}
                     >
                         {cat}

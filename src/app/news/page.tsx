@@ -41,7 +41,7 @@ export default function NewsPage() {
     return (
         <div className="container py-12 sm:py-16 md:py-20 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="text-center space-y-4 mb-12">
-                <h1>Meta News</h1>
+                <h1>News</h1>
                 <p className="text-muted-foreground max-w-xl mx-auto">
                     Latest crypto and Web3 news from around the world.
                 </p>
