@@ -10,54 +10,56 @@ const metas = [
     "DePIN",
     "SocialFi",
     "DAOs",
-    "Infrastructure",
+    "Infra",
 ]
 
 export function MetasOrbit() {
     return (
-        <div className="relative w-full max-w-[500px] aspect-square mx-auto">
+        <div className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] mx-auto">
             {/* Outer glow ring */}
-            <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse" />
+            <div className="absolute inset-0 rounded-full border-2 border-primary/20" />
 
-            {/* Main orbit ring */}
-            <div className="absolute inset-4 rounded-full border border-border/50" />
+            {/* Middle ring */}
+            <div className="absolute inset-6 sm:inset-8 rounded-full border border-border/30" />
 
-            {/* Inner glow */}
-            <div className="absolute inset-8 rounded-full bg-gradient-to-br from-primary/5 to-primary/10" />
+            {/* Inner glow circle */}
+            <div className="absolute inset-16 sm:inset-20 md:inset-24 rounded-full bg-gradient-to-br from-primary/10 to-transparent" />
 
-            {/* Center content */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            {/* Center content - fixed position */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                 <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
-                        <span className="bg-gradient-to-b from-foreground via-foreground to-foreground/50 bg-clip-text text-transparent drop-shadow-lg">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight">
+                        <span className="block bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
                             SWITCH
                         </span>
-                        <br />
-                        <span className="bg-gradient-to-b from-primary via-primary to-primary/50 bg-clip-text text-transparent drop-shadow-lg">
+                        <span className="block bg-gradient-to-b from-primary to-primary/70 bg-clip-text text-transparent">
                             LABS
                         </span>
-                    </h2>
+                    </div>
                 </div>
             </div>
 
-            {/* Rotating metas container */}
+            {/* Rotating orbit container */}
             <div className="absolute inset-0 animate-spin-slow">
                 {metas.map((meta, i) => {
                     const angle = (360 / metas.length) * i
-                    const radius = 45 // percentage from center
+                    const radian = (angle * Math.PI) / 180
+                    // Position on the edge of the circle (radius = 50% - padding for the pill)
+                    const x = 50 + 42 * Math.cos(radian - Math.PI / 2)
+                    const y = 50 + 42 * Math.sin(radian - Math.PI / 2)
+
                     return (
                         <div
                             key={meta}
-                            className="absolute left-1/2 top-1/2"
+                            className="absolute"
                             style={{
-                                transform: `rotate(${angle}deg) translateY(-${radius}%) rotate(-${angle}deg) translate(-50%, -50%)`,
+                                left: `${x}%`,
+                                top: `${y}%`,
+                                transform: 'translate(-50%, -50%)',
                             }}
                         >
                             <div
-                                className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm text-xs sm:text-sm font-medium hover:border-primary/50 hover:bg-card transition-all duration-300 whitespace-nowrap"
-                                style={{
-                                    transform: `rotate(${-angle}deg)`,
-                                }}
+                                className="animate-counter-spin px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-border/50 bg-card/90 backdrop-blur-sm text-[10px] sm:text-xs md:text-sm font-medium whitespace-nowrap shadow-sm"
                             >
                                 {meta}
                             </div>

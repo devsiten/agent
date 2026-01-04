@@ -220,6 +220,10 @@
   animation: spin-slow 40s linear infinite;
 }
 
+.animate-counter-spin {
+  animation: spin-slow 40s linear infinite reverse;
+}
+
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
 
