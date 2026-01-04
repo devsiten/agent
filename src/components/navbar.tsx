@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -24,9 +25,16 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
             <div className="container flex h-16 items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center font-black text-xl sm:text-2xl tracking-tight">
-                    <span className="text-primary">SWITCH</span>
-                    <span className="text-foreground">LABS</span>
+                <Link href="/" className="flex items-center gap-2 font-black text-xl sm:text-2xl tracking-tight">
+                    <Image
+                        src="/images/logo.jpg"
+                        alt="Switch Labs"
+                        width={36}
+                        height={36}
+                        className="rounded-full"
+                    />
+                    <span className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">SWITCH</span>
+                    <span className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">LABS</span>
                 </Link>
 
                 {/* Desktop Nav */}
