@@ -23,12 +23,10 @@ export function Navbar() {
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
             <div className="container flex h-16 items-center justify-between">
-                {/* Animated Logo */}
-                <Link href="/" className="flex items-center space-x-1 font-bold text-2xl tracking-tight group">
-                    <span className="bg-gradient-to-r from-primary via-purple-400 to-primary bg-clip-text text-transparent animate-shimmer bg-[length:200%_100%]">
-                        Switch
-                    </span>
-                    <span className="text-foreground/90">Labs.</span>
+                {/* Logo */}
+                <Link href="/" className="flex items-center font-black text-xl sm:text-2xl tracking-tight">
+                    <span className="text-primary">SWITCH</span>
+                    <span className="text-foreground">LABS</span>
                 </Link>
 
                 {/* Desktop Nav */}
