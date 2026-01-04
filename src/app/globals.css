@@ -113,12 +113,16 @@
     font-family: 'Satoshi', var(--font-sans), sans-serif;
   }
 
-  /* Premium headline styling */
+  /* Premium headline styling - Glass Bold */
   h1,
   h2,
   h3 {
     font-family: 'Satoshi', var(--font-sans), sans-serif;
     letter-spacing: -0.02em;
+    background: linear-gradient(180deg, hsl(var(--foreground)) 0%, hsl(var(--foreground) / 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   h1 {
