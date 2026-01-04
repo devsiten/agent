@@ -56,7 +56,7 @@ export function Navbar() {
 
                     {/* CTA Button - Desktop */}
                     <Link href="/apply" className="hidden md:block">
-                        <Button variant="default" size="lg" className="text-base">Get in Touch</Button>
+                        <Button size="lg" className="text-base bg-white text-primary hover:bg-gray-100 border-0">Get in Touch</Button>
                     </Link>
 
                     {/* Mobile Menu */}

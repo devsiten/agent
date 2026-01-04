@@ -55,7 +55,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
             <Link href="/apply">
-              <Button size="lg" className="h-14 px-10 text-lg font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow w-full sm:w-auto">
+              <Button size="lg" className="h-14 px-10 text-lg font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow w-full sm:w-auto bg-white text-primary hover:bg-gray-100">
                 Work With Us
               </Button>
             </Link>
