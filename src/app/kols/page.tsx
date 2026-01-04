@@ -15,6 +15,7 @@ export default function KolsPage() {
     const [kols, setKols] = useState<KOL[]>([])
     const [loading, setLoading] = useState(true)
     const [activeCategory, setActiveCategory] = useState("All")
+    const [failedImages, setFailedImages] = useState<Set<string>>(new Set())
 
     useEffect(() => {
         async function fetchKOLs() {
@@ -35,6 +36,10 @@ export default function KolsPage() {
         }
         fetchKOLs()
     }, [])
+
+    const handleImageError = (handle: string) => {
+        setFailedImages(prev => new Set(prev).add(handle))
+    }
 
     const categories = ["All", ...Array.from(new Set(kols.map(k => k.category)))]
     const filteredKols = activeCategory === "All"
@@ -58,8 +63,8 @@ export default function KolsPage() {
                         key={cat}
                         onClick={() => setActiveCategory(cat)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                                ? "bg-primary text-white"
-                                : "bg-muted/50 hover:bg-muted text-foreground"
+                            ? "bg-primary text-white"
+                            : "bg-muted/50 hover:bg-muted text-foreground"
                             }`}
                     >
                         {cat}
@@ -77,15 +82,15 @@ export default function KolsPage() {
                 <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                     {[...Array(20)].map((_, i) => (
                         <div key={i} className="rounded-xl border border-border/30 bg-background p-4 text-center">
-                            <div className="w-16 h-16 rounded-full bg-muted/30 mx-auto mb-3"></div>
-                            <div className="h-4 bg-muted/30 rounded w-3/4 mx-auto mb-2"></div>
-                            <div className="h-3 bg-muted/30 rounded w-1/2 mx-auto"></div>
+                            <div className="w-16 h-16 rounded-full bg-muted/20 mx-auto mb-3"></div>
+                            <div className="h-4 bg-muted/20 rounded w-3/4 mx-auto mb-2"></div>
+                            <div className="h-3 bg-muted/20 rounded w-1/2 mx-auto"></div>
                         </div>
                     ))}
                 </div>
             ) : filteredKols.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
-                    <div className="w-16 h-16 rounded-full bg-muted/30 flex items-center justify-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-muted/20 flex items-center justify-center mb-4">
                         <Users className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">No KOLs Found</h3>
@@ -106,15 +111,22 @@ export default function KolsPage() {
                             className="group rounded-xl border border-border/30 bg-background p-4 text-center hover:border-primary/40 transition-all duration-300"
                         >
                             {/* Avatar */}
-                            <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 mx-auto mb-3 flex items-center justify-center overflow-hidden">
-                                <Image
-                                    src={`https://unavatar.io/twitter/${kol.handle}`}
-                                    alt={kol.name}
-                                    width={64}
-                                    height={64}
-                                    className="rounded-full"
-                                    unoptimized
-                                />
+                            <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-muted/20 mx-auto mb-3 flex items-center justify-center overflow-hidden">
+                                {failedImages.has(kol.handle) ? (
+                                    <span className="text-xl font-bold text-primary">
+                                        {kol.name.charAt(0)}
+                                    </span>
+                                ) : (
+                                    <Image
+                                        src={`https://unavatar.io/twitter/${kol.handle}`}
+                                        alt={kol.name}
+                                        width={64}
+                                        height={64}
+                                        className="rounded-full"
+                                        onError={() => handleImageError(kol.handle)}
+                                        unoptimized
+                                    />
+                                )}
                             </div>
 
                             {/* Name */}
@@ -136,7 +148,7 @@ export default function KolsPage() {
 
                             {/* Category */}
                             <div className="mt-2">
-                                <span className="px-2 py-0.5 text-xs rounded-full bg-muted/50">
+                                <span className="px-2 py-0.5 text-xs rounded-full bg-muted/30">
                                     {kol.category}
                                 </span>
                             </div>

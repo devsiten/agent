@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
 import Image from "next/image"
 import { Newspaper, ExternalLink } from "lucide-react"
 
@@ -17,6 +16,7 @@ interface NewsItem {
 export default function NewsPage() {
     const [news, setNews] = useState<NewsItem[]>([])
     const [loading, setLoading] = useState(true)
+    const [failedImages, setFailedImages] = useState<Set<number>>(new Set())
 
     useEffect(() => {
         async function fetchNews() {
@@ -38,6 +38,10 @@ export default function NewsPage() {
         fetchNews()
     }, [])
 
+    const handleImageError = (index: number) => {
+        setFailedImages(prev => new Set(prev).add(index))
+    }
+
     return (
         <div className="container py-12 sm:py-16 md:py-20 px-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="text-center space-y-4 mb-12">
@@ -50,11 +54,11 @@ export default function NewsPage() {
             {loading ? (
                 <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                        <div key={i} className="rounded-xl border border-border/50 bg-card/30 overflow-hidden animate-pulse">
-                            <div className="h-40 bg-secondary"></div>
+                        <div key={i} className="rounded-xl border border-border/30 bg-background overflow-hidden">
+                            <div className="h-40 bg-muted/20"></div>
                             <div className="p-4">
-                                <div className="h-4 bg-secondary rounded w-3/4 mb-3"></div>
-                                <div className="h-3 bg-secondary rounded w-1/2"></div>
+                                <div className="h-4 bg-muted/20 rounded w-3/4 mb-3"></div>
+                                <div className="h-3 bg-muted/20 rounded w-1/2"></div>
                             </div>
                         </div>
                     ))}
@@ -73,21 +77,22 @@ export default function NewsPage() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm overflow-hidden hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300"
+                            className="group rounded-xl border border-border/30 bg-background overflow-hidden hover:border-primary/40 transition-all duration-300"
                         >
                             {/* Image */}
-                            <div className="relative w-full h-40 bg-secondary overflow-hidden">
-                                {item.image && item.image !== '/images/news-placeholder.png' ? (
+                            <div className="relative w-full h-40 bg-muted/10 overflow-hidden">
+                                {item.image && !failedImages.has(i) ? (
                                     <Image
                                         src={item.image}
                                         alt={item.title}
                                         fill
                                         className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                        onError={() => handleImageError(i)}
                                         unoptimized
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary">
-                                        <Newspaper className="h-10 w-10 text-muted-foreground" />
+                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-muted/20">
+                                        <Newspaper className="h-10 w-10 text-muted-foreground/50" />
                                     </div>
                                 )}
                             </div>
