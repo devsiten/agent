@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -20,6 +21,7 @@ const navLinks = [
 
 export function Navbar() {
     const { theme, setTheme } = useTheme()
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
@@ -68,7 +70,7 @@ export function Navbar() {
                     </Link>
 
                     {/* Mobile Menu */}
-                    <Sheet>
+                    <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                         <SheetTrigger asChild className="lg:hidden">
                             <Button variant="ghost" size="icon">
                                 <Menu className="h-5 w-5" />
@@ -77,7 +79,11 @@ export function Navbar() {
                         <SheetContent side="right" className="w-[260px] p-0">
                             <div className="flex flex-col h-full pt-12 pb-6 px-6">
                                 {/* Logo in menu */}
-                                <Link href="/" className="flex items-center font-black text-xl tracking-tight mb-8">
+                                <Link
+                                    href="/"
+                                    className="flex items-center font-black text-xl tracking-tight mb-8"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
                                     <span className="text-primary">SWITCH</span>
                                     <span className="text-foreground">LABS</span>
                                 </Link>
@@ -88,6 +94,7 @@ export function Navbar() {
                                         <Link
                                             key={link.href}
                                             href={link.href}
+                                            onClick={() => setMobileMenuOpen(false)}
                                             className="py-3 px-4 text-base font-medium rounded-lg transition-colors hover:bg-secondary hover:text-primary"
                                         >
                                             {link.label}

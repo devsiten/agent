@@ -46,7 +46,7 @@ export function Footer() {
 
                         {/* Contact */}
                         <div className="space-y-4 text-center sm:text-left">
-                            <h4 className="font-semibold text-lg">Contact</h4>
+                            <h4 className="font-semibold text-lg">Connect</h4>
                             <div className="flex gap-4 justify-center sm:justify-start">
                                 <a
                                     href="https://x.com/TheSwitchLabs"
@@ -64,9 +64,6 @@ export function Footer() {
                                     <Send className="h-5 w-5" />
                                 </a>
                             </div>
-                            <p className="text-base text-muted-foreground">
-                                hello@switchlabs.io
-                            </p>
                         </div>
                     </div>
 
