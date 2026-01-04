@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { ChevronRight, Newspaper, ExternalLink } from "lucide-react"
 import { MetasOrbit } from "@/components/metas-orbit"
 import EcosystemCircle from "@/components/ecosystem-circle"
+import KolsCircle from "@/components/kols-circle"
 
 const services = [
   {
@@ -98,6 +99,9 @@ export default function Home() {
           <MetasOrbit />
         </div>
       </section>
+
+      {/* KOLs Circle */}
+      <KolsCircle />
 
       {/* What We Do Section */}
       <section className="py-12 md:py-16 bg-secondary/30 backdrop-blur-sm px-4">
