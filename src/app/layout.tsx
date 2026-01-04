@@ -17,6 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Satoshi Font for Headlines */}
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={GeistSans.className}>
         <ThemeProvider
           attribute="class"
