@@ -51,6 +51,7 @@ const marketingServices = [
 ]
 
 const budgetRanges = [
+    "$1,000 - $5,000",
     "$5,000 - $15,000",
     "$15,000 - $25,000",
     "$25,000 - $50,000",
