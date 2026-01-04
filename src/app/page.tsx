@@ -1,17 +1,34 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { TrendingUp, Users, Brush, Cpu, ChevronRight, Newspaper } from "lucide-react";
+import { ChevronRight, Newspaper } from "lucide-react";
 import { MetasOrbit } from "@/components/metas-orbit";
 
-export default function Home() {
-  const pillars = [
-    { icon: <TrendingUp className="h-7 w-7" />, title: "Strategic Marketing", desc: "Tokenomics, positioning, and go-to-market strategy" },
-    { icon: <Users className="h-7 w-7" />, title: "Community Building", desc: "Moderation, influencer partnerships, ambassadors" },
-    { icon: <Brush className="h-7 w-7" />, title: "Brand Development", desc: "Video production, UI/UX, visual identity" },
-    { icon: <Cpu className="h-7 w-7" />, title: "Technical Support", desc: "dApp development, smart contracts, audits" },
-  ];
+const services = [
+  {
+    title: "Strategic Marketing",
+    image: "/images/strategic-marketing.png",
+    description: "We craft data-driven go-to-market strategies that position your project for success. From tokenomics advisory to market positioning and growth roadmaps.",
+  },
+  {
+    title: "Community Building",
+    image: "/images/community-building.png",
+    description: "We cultivate engaged, loyal communities that become your most powerful growth engine. Our team handles moderation, events, and partnerships 24/7.",
+  },
+  {
+    title: "Brand Development",
+    image: "/images/brand-development.png",
+    description: "We create memorable visual identities and high-impact content that sets you apart. From video to UI/UX, we make your brand unforgettable.",
+  },
+  {
+    title: "Technical Support",
+    image: "/images/technical-support.png",
+    description: "We provide end-to-end technical guidance from smart contracts to full-stack decentralized applications. Build with confidence.",
+  },
+];
 
+export default function Home() {
   // Empty state for news - ready for real data
   const news: Array<{ title: string, date: string, excerpt: string }> = [];
 
@@ -54,24 +71,41 @@ export default function Home() {
       {/* Web3 Metas Orbit Section */}
       <section className="py-20 md:py-28 px-4">
         <div className="container">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">The Narratives We Track</h2>
+          <h2 className="text-center mb-8">The Narratives We Track</h2>
           <MetasOrbit />
         </div>
       </section>
 
-      {/* What We Do Section */}
+      {/* What We Do Section - Same as Services */}
       <section className="py-20 md:py-28 bg-secondary/30 backdrop-blur-sm px-4">
         <div className="container">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 md:mb-16">What We Do</h2>
-          <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {pillars.map((pillar, i) => (
-              <div key={i} className="flex flex-col items-center text-center p-6 sm:p-8 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm hover:border-primary/50 hover:bg-background/80 transition-all duration-300">
-                <div className="p-4 rounded-full bg-primary/10 text-primary mb-4 sm:mb-6">
-                  {pillar.icon}
+          <h2 className="text-center mb-12 md:mb-16">What We Do</h2>
+          <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, i) => (
+              <Link href="/services" key={i}>
+                <div className="group h-full rounded-2xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300 overflow-hidden">
+                  {/* Image */}
+                  <div className="relative w-full h-32 sm:h-40 overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-4 sm:p-5 -mt-6 relative z-10">
+                    <h3 className="text-base sm:text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-lg sm:text-xl mb-2 sm:mb-3">{pillar.title}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{pillar.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -81,7 +115,7 @@ export default function Home() {
       <section className="py-20 md:py-28 px-4">
         <div className="container">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold">Latest Updates</h2>
+            <h2>Latest Updates</h2>
             <Link href="#" className="text-primary hover:underline flex items-center gap-1">
               View All <ChevronRight className="h-4 w-4" />
             </Link>
