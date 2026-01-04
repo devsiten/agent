@@ -24,7 +24,7 @@ export function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
+        <header className="sticky top-0 z-50 w-full border-b border-border/30 bg-transparent backdrop-blur-xl">
             <div className="container flex h-16 items-center justify-between px-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 font-black text-lg sm:text-xl tracking-tight flex-shrink-0">

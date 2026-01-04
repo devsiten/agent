@@ -13,7 +13,7 @@ function XLogo({ className }: { className?: string }) {
 
 export function Footer() {
     return (
-        <footer className="w-full border-t bg-background/80 backdrop-blur-sm">
+        <footer className="w-full border-t border-border/30 bg-transparent backdrop-blur-sm">
             <div className="py-12 px-4">
                 <div className="container">
                     <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
