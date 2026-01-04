@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import {
     TrendingUp,
     Users,
@@ -21,6 +22,7 @@ import {
 const services = [
     {
         title: "Strategic Marketing",
+        image: "/images/strategic-marketing.png",
         description: "We craft data-driven go-to-market strategies that position your project for success. From tokenomics advisory to market positioning and growth roadmaps, we help you reach the right audience at the right time.",
         features: [
             { icon: <Target className="h-5 w-5" />, name: "Tokenomics Advisory" },
@@ -28,10 +30,10 @@ const services = [
             { icon: <BarChart3 className="h-5 w-5" />, name: "Growth Roadmaps" },
             { icon: <Megaphone className="h-5 w-5" />, name: "Exchange Listing" },
         ],
-        gradient: "from-purple-500/20 via-violet-500/10 to-transparent"
     },
     {
         title: "Community Building",
+        image: "/images/community-building.png",
         description: "We cultivate engaged, loyal communities that become your most powerful growth engine. Our team handles moderation, events, and partnerships to keep your community thriving 24/7.",
         features: [
             { icon: <MessageCircle className="h-5 w-5" />, name: "24/7 Moderation" },
@@ -39,10 +41,10 @@ const services = [
             { icon: <Users className="h-5 w-5" />, name: "Ambassador Programs" },
             { icon: <Target className="h-5 w-5" />, name: "Discord & Telegram" },
         ],
-        gradient: "from-blue-500/20 via-cyan-500/10 to-transparent"
     },
     {
         title: "Brand Development",
+        image: "/images/brand-development.png",
         description: "We create memorable visual identities and high-impact content that sets you apart in the crowded Web3 space. From video to UI/UX, we make your brand unforgettable.",
         features: [
             { icon: <Video className="h-5 w-5" />, name: "Video Production" },
@@ -50,10 +52,10 @@ const services = [
             { icon: <Palette className="h-5 w-5" />, name: "Visual Identity" },
             { icon: <Brush className="h-5 w-5" />, name: "Marketing Assets" },
         ],
-        gradient: "from-orange-500/20 via-amber-500/10 to-transparent"
     },
     {
         title: "Technical Support",
+        image: "/images/technical-support.png",
         description: "We provide end-to-end technical guidance from smart contracts to full-stack decentralized applications. Build with confidence knowing your tech foundation is solid.",
         features: [
             { icon: <Code className="h-5 w-5" />, name: "dApp Development" },
@@ -61,7 +63,6 @@ const services = [
             { icon: <Blocks className="h-5 w-5" />, name: "Blockchain Integration" },
             { icon: <Cpu className="h-5 w-5" />, name: "Technical Advisory" },
         ],
-        gradient: "from-green-500/20 via-emerald-500/10 to-transparent"
     },
 ]
 
@@ -81,13 +82,21 @@ export default function ServicesPage() {
                 {services.map((service, i) => (
                     <div
                         key={i}
-                        className="group relative p-6 sm:p-8 rounded-2xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300 overflow-hidden"
+                        className="group relative rounded-2xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300 overflow-hidden"
                     >
-                        {/* Background Gradient */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-50 dark:opacity-30`} />
+                        {/* Image */}
+                        <div className="relative w-full h-48 sm:h-56 overflow-hidden">
+                            <Image
+                                src={service.image}
+                                alt={service.title}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                        </div>
 
                         {/* Content */}
-                        <div className="relative z-10">
+                        <div className="p-6 sm:p-8 -mt-8 relative z-10">
                             <h2 className="text-xl sm:text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
                                 {service.title}
                             </h2>
