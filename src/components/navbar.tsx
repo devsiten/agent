@@ -24,7 +24,7 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl">
             <div className="container flex h-16 items-center justify-between">
                 {/* Animated Logo */}
-                <Link href="/" className="flex items-center space-x-1 font-extrabold text-2xl tracking-tighter group">
+                <Link href="/" className="flex items-center space-x-1 font-bold text-2xl tracking-tight group">
                     <span className="bg-gradient-to-r from-primary via-purple-400 to-primary bg-clip-text text-transparent animate-shimmer bg-[length:200%_100%]">
                         Switch
                     </span>
@@ -32,7 +32,7 @@ export function Navbar() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
+                <nav className="hidden lg:flex items-center gap-6 text-base font-medium">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
@@ -58,7 +58,7 @@ export function Navbar() {
 
                     {/* CTA Button - Desktop */}
                     <Link href="/apply" className="hidden md:block">
-                        <Button variant="default">Get Started</Button>
+                        <Button variant="default" size="lg" className="text-base">Get in Touch</Button>
                     </Link>
 
                     {/* Mobile Menu */}
@@ -80,7 +80,7 @@ export function Navbar() {
                                     </Link>
                                 ))}
                                 <Link href="/apply" className="mt-4">
-                                    <Button className="w-full">Get Started</Button>
+                                    <Button className="w-full text-base">Get in Touch</Button>
                                 </Link>
                             </nav>
                         </SheetContent>

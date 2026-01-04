@@ -31,62 +31,59 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  /* Larger base font */
-  --font-size-base: 1rem;
 }
 
 @layer base {
+
+  /* Light Mode */
   :root {
-    --background: 220 20% 97%;
-    --foreground: 224 71.4% 4.1%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover-foreground: 0 0% 9%;
 
-    /* Purple Primary */
-    --primary: 262.1 83.3% 57.8%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 262.1 83.3% 57.8%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 262 83% 58%;
     --radius: 0.5rem;
   }
 
-  /* Dark Mode - AP Collective Style */
+  /* Dark Mode - Pure Dark with Visible Text */
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 5%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 5%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
 
-    /* Purple Primary Dark */
-    --primary: 263.4 70% 50.4%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5% 12%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 5% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 5% 12%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 12%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5% 17%;
-    --input: 240 5% 17%;
-    --ring: 263.4 70% 50.4%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 262 83% 58%;
   }
 }
 
@@ -96,48 +93,16 @@
   }
 
   html {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   body {
-    @apply bg-background text-foreground text-base;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl;
-  }
-
-  h3 {
-    @apply text-xl md:text-2xl;
-  }
-
-  p {
-    @apply text-base md:text-lg;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Light Mode Background - Lunar Strategy Style */
-.light-bg {
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-    linear-gradient(180deg, hsl(220 20% 97%) 0%, hsl(220 20% 94%) 100%);
-}
-
-/* Dark Mode Background - AP Collective Style */
-.dark .animated-bg {
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-    linear-gradient(180deg, hsl(240 10% 3.9%) 0%, hsl(240 10% 6%) 100%);
-}
-
-/* Animated Background Container */
+/* Animated Background */
 .animated-bg {
   position: fixed;
   top: 0;
@@ -147,14 +112,7 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-}
-
-/* Light mode uses gradient background */
-:root .animated-bg {
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-    linear-gradient(180deg, hsl(220 20% 97%) 0%, hsl(220 20% 94%) 100%);
+  background: hsl(var(--background));
 }
 
 .animated-bg::before,
@@ -162,37 +120,37 @@
   content: "";
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(120px);
   opacity: 0.5;
   animation: float 25s ease-in-out infinite;
 }
 
 .animated-bg::before {
-  width: 600px;
-  height: 600px;
-  background: rgba(124, 58, 237, 0.15);
-  top: -200px;
-  left: -200px;
+  width: 500px;
+  height: 500px;
+  background: rgba(124, 58, 237, 0.25);
+  top: -150px;
+  left: -150px;
   animation-delay: 0s;
 }
 
 .animated-bg::after {
-  width: 500px;
-  height: 500px;
-  background: rgba(99, 102, 241, 0.12);
-  bottom: -150px;
-  right: -150px;
+  width: 400px;
+  height: 400px;
+  background: rgba(99, 102, 241, 0.2);
+  bottom: -100px;
+  right: -100px;
   animation-delay: -12s;
 }
 
 .animated-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(100px);
   opacity: 0.3;
-  background: rgba(139, 92, 246, 0.15);
-  width: 400px;
-  height: 400px;
+  background: rgba(139, 92, 246, 0.25);
+  width: 350px;
+  height: 350px;
   top: 40%;
   left: 60%;
   transform: translate(-50%, -50%);
@@ -228,8 +186,8 @@
   }
 
   50% {
-    opacity: 0.4;
-    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }
 
@@ -259,18 +217,22 @@
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
-  .animated-bg::before {
-    width: 300px;
-    height: 300px;
+  html {
+    font-size: 16px;
   }
 
-  .animated-bg::after {
+  .animated-bg::before {
     width: 250px;
     height: 250px;
   }
 
-  .animated-orb {
+  .animated-bg::after {
     width: 200px;
     height: 200px;
+  }
+
+  .animated-orb {
+    width: 150px;
+    height: 150px;
   }
 }
