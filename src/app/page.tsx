@@ -45,7 +45,13 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const res = await fetch('/api/news')
+        // Use environment variable for worker URL, fallback to empty state
+        const workerUrl = process.env.NEXT_PUBLIC_NEWS_API_URL
+        if (!workerUrl) {
+          setLoading(false)
+          return
+        }
+        const res = await fetch(workerUrl)
         const data = await res.json()
         setNews(data.news || [])
       } catch (error) {
