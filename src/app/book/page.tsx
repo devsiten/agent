@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -19,9 +18,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 
 const bookingSchema = z.object({
-    name: z.string().min(2),
-    email: z.string().email(),
-    topic: z.string().min(5),
+    name: z.string().min(2, { message: "Name is required." }),
+    email: z.string().email({ message: "Please enter a valid email." }),
+    company: z.string().optional(),
+    topic: z.string().min(5, { message: "Please describe what you want to discuss." }),
 })
 
 export default function BookPage() {
@@ -30,21 +30,22 @@ export default function BookPage() {
         defaultValues: {
             name: "",
             email: "",
+            company: "",
             topic: "",
         },
     })
 
     function onSubmit(values: z.infer<typeof bookingSchema>) {
         console.log(values)
-        alert("Consultation Requested! (Frontend Demo)")
+        alert("Consultation Requested! We will reach out to schedule a call.")
     }
 
     return (
-        <div className="container py-16 max-w-xl animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Book a Consultation</CardTitle>
-                    <CardDescription>Get expert advice on positioning, promotion, or product strategy.</CardDescription>
+        <div className="min-h-screen flex items-center justify-center py-16 px-4">
+            <Card className="w-full max-w-xl">
+                <CardHeader className="text-center">
+                    <CardTitle className="text-3xl">Book a Consultation</CardTitle>
+                    <CardDescription className="text-lg">Get expert advice on marketing, growth, or technical strategy.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
@@ -54,9 +55,9 @@ export default function BookPage() {
                                 name="name"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Your Name</FormLabel>
+                                        <FormLabel className="text-base">Your Name</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="John Doe" {...field} />
+                                            <Input placeholder="John Doe" className="h-12 text-base" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -67,9 +68,22 @@ export default function BookPage() {
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email Address</FormLabel>
+                                        <FormLabel className="text-base">Email Address</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="john@project.com" {...field} />
+                                            <Input type="email" placeholder="john@project.com" className="h-12 text-base" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="company"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel className="text-base">Company / Project Name (Optional)</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your company or project" className="h-12 text-base" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -80,15 +94,21 @@ export default function BookPage() {
                                 name="topic"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>What do you want to discuss?</FormLabel>
+                                        <FormLabel className="text-base">What would you like to discuss?</FormLabel>
                                         <FormControl>
-                                            <Textarea placeholder="Launching a new token..." className="resize-none" {...field} />
+                                            <Textarea
+                                                placeholder="Tell us about your goals, challenges, or questions..."
+                                                className="min-h-[120px] text-base resize-none"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" size="lg" className="w-full">Request Booking</Button>
+                            <Button type="submit" size="lg" className="w-full h-14 text-lg font-semibold">
+                                Request Consultation
+                            </Button>
                         </form>
                     </Form>
                 </CardContent>
