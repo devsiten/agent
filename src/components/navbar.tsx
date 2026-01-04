@@ -78,7 +78,7 @@ export function Navbar() {
                                     </Link>
                                 ))}
                                 <Link href="/apply" className="mt-4">
-                                    <Button className="w-full text-base bg-primary text-white hover:bg-primary/90">Get in Touch</Button>
+                                    <Button className="w-full text-base bg-white text-primary hover:bg-gray-100 border-0">Get in Touch</Button>
                                 </Link>
                             </nav>
                         </SheetContent>
