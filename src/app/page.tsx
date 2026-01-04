@@ -1,8 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ChevronRight, Newspaper } from "lucide-react";
-import { MetasOrbit } from "@/components/metas-orbit";
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { ChevronRight, Newspaper, ExternalLink } from "lucide-react"
+import { MetasOrbit } from "@/components/metas-orbit"
 
 const services = [
   {
@@ -25,11 +28,34 @@ const services = [
     image: "/images/technical-support.png",
     description: "We provide end-to-end technical guidance from smart contracts to full-stack decentralized applications. Build with confidence.",
   },
-];
+]
+
+interface NewsItem {
+  title: string
+  url: string
+  source: string
+  date: string
+  currencies: string[]
+}
 
 export default function Home() {
-  // Empty state for news - ready for real data
-  const news: Array<{ title: string, date: string, excerpt: string }> = [];
+  const [news, setNews] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const res = await fetch('/api/news')
+        const data = await res.json()
+        setNews(data.news || [])
+      } catch (error) {
+        console.error('Failed to fetch news:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchNews()
+  }, [])
 
   return (
     <div className="flex flex-col">
@@ -97,37 +123,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* News/Updates Section */}
+      {/* Meta News Section */}
       <section className="py-12 md:py-16 px-4">
         <div className="container">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-            <h2>Latest Updates</h2>
-            <Link href="#" className="text-primary hover:underline flex items-center gap-1">
+            <h2>Meta News</h2>
+            <Link href="#" className="text-primary hover:underline flex items-center gap-1 text-sm">
               View All <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
 
-          {news.length === 0 ? (
+          {loading ? (
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="rounded-xl border border-border/50 bg-card/30 p-4 animate-pulse">
+                  <div className="h-4 bg-secondary rounded w-3/4 mb-3"></div>
+                  <div className="h-3 bg-secondary rounded w-1/2"></div>
+                </div>
+              ))}
+            </div>
+          ) : news.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-10 sm:py-12 text-center border border-dashed rounded-xl px-4 border-border/50 bg-card/30 backdrop-blur-sm">
               <Newspaper className="h-8 w-8 sm:h-10 sm:w-10 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No Updates Yet</h3>
-              <p className="text-muted-foreground max-w-md text-sm">News and announcements will appear here. Stay tuned for updates.</p>
+              <h3 className="text-lg font-semibold mb-2">No News Available</h3>
+              <p className="text-muted-foreground max-w-md text-sm">Unable to fetch news at this time.</p>
             </div>
           ) : (
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
-              {news.map((item, i) => (
-                <Card key={i} className="hover:border-primary/50 transition-colors">
-                  <CardHeader>
-                    <CardDescription>{item.date}</CardDescription>
-                    <CardTitle className="text-xl">{item.title}</CardTitle>
-                    <CardDescription className="text-base">{item.excerpt}</CardDescription>
-                  </CardHeader>
-                </Card>
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {news.slice(0, 9).map((item, i) => (
+                <a
+                  key={i}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-xl border border-border/50 bg-card/50 dark:bg-card/30 backdrop-blur-sm p-4 hover:border-primary/40 hover:bg-card/80 dark:hover:bg-card/50 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="text-sm font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                      {item.title}
+                    </h3>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span>{item.source}</span>
+                    <span>•</span>
+                    <span>{item.date}</span>
+                  </div>
+                  {item.currencies.length > 0 && (
+                    <div className="flex gap-1 mt-2 flex-wrap">
+                      {item.currencies.slice(0, 3).map((currency) => (
+                        <span key={currency} className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary">
+                          {currency}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </a>
               ))}
             </div>
           )}
         </div>
       </section>
     </div>
-  );
+  )
 }
